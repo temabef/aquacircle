@@ -510,6 +510,32 @@
       object-fit: contain;
     }
 
+    .market-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .market-heading {
+      font-size: clamp(1.7rem, 2.2vw, 2.2rem);
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin: 0 0 14px;
+      max-width: 22ch;
+    }
+
+    .market-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 0 24px;
+      max-width: 44ch;
+    }
+
+    .market-copy .target-list {
+      margin: 0;
+    }
+
     .feature-icon {
       width: 62px;
       height: 62px;
@@ -768,14 +794,10 @@
     </section>
 
     <section class="section" id="market">
-      <div class="section-header reveal">
-        <div>
-          <h2>Built for aquaculture producers and seafood processors</h2>
-        </div>
-        <p>Target customers include fish farms, seafood processors, cooperatives, and coastal processing hubs looking to turn organic by-products into revenue rather than waste.</p>
-      </div>
       <div class="section-split reveal">
-        <div>
+        <div class="market-copy">
+          <h2 class="market-heading">Built for aquaculture producers and seafood processors</h2>
+          <p class="market-sub">Target customers include fish farms, seafood processors, cooperatives, and coastal processing hubs looking to turn organic by-products into revenue rather than waste.</p>
           <ul class="target-list">
             <li>Fish farms and hatcheries</li>
             <li>Seafood processors</li>
@@ -788,6 +810,7 @@
         </div>
       </div>
     </section>
+
 
     <section class="section" id="impact">
       <div class="section-header reveal">
