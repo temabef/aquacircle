@@ -4,7 +4,7 @@
 
 AquaCircle Biorefinery is an early-stage venture developing compact modular bioprocessing units that convert aquaculture and seafood by-products — shrimp shells, fish offal, and seafood trimmings — into high-value biomaterials including **chitosan** and **bioactive peptides**.
 
-> 🏆 **Finalist — Ocean Community Challenge 2026** | Blue Readiness Pathway
+> **Finalist — Ocean Community Challenge 2026** | Blue Readiness Pathway
 
 ---
 
@@ -47,10 +47,10 @@ The AquaCircle system integrates modular hardware, IoT monitoring, and AI-assist
 
 AquaCircle's approach is designed to support a **circular value chain** for coastal aquaculture:
 
-- ♻️ **Waste valorization** — Organic by-products become useful biomaterials
-- 💰 **New income streams** — Small operators gain revenue from chitosan, peptides, and circular product flows
-- 🌊 **Reduced environmental burden** — Local processing lowers waste transport and improves coastal compliance
-- 🐟 **Sustainable aquaculture alignment** — Turning waste into measurable circular value supports regenerative sector goals
+- **Waste valorization** — Organic by-products become useful biomaterials
+- **New income streams** — Small operators gain revenue from chitosan, peptides, and circular product flows
+- **Reduced environmental burden** — Local processing lowers waste transport and improves coastal compliance
+- **Sustainable aquaculture alignment** — Turning waste into measurable circular value supports regenerative sector goals
 
 ---
 
@@ -60,8 +60,6 @@ AquaCircle's approach is designed to support a **circular value chain** for coas
 *Aquaculture Scientist & AI Developer*
 
 Saheed holds an MSc in Aquaculture and Fisheries from Istanbul University with hands-on experience in fish reproduction, hatchery systems, fieldwork, and technical product development. He bridges aquaculture research with practical AI and product development to advance accessible circular processing for coastal ecosystems.
-
-📧 temabef (at) gmail.com
 
 ---
 
