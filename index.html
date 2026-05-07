@@ -435,6 +435,23 @@
       display: block;
     }
 
+    .photo-frame {
+      background: var(--surface);
+      padding: 16px;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-strong);
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+    }
+
     .process-row {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -695,6 +712,7 @@
         <a href="#problem">Problem</a>
         <a href="#solution">Solution</a>
         <a href="#technology">Technology</a>
+        <a href="#pilot">Pilot</a>
         <a href="#impact">Impact</a>
         <a href="#founder">Founder</a>
         <a href="#contact">Contact</a>
@@ -794,6 +812,18 @@
           <h3 class="card-title">Standardized output quality</h3>
           <p class="card-text">The design emphasizes reliable chitosan and peptide yield so partners can use outputs with confidence.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="pilot">
+      <div class="section-header reveal">
+        <div>
+          <h2>Early-stage pilot workflow (bench-scale prototype)</h2>
+        </div>
+        <p>AquaCircle begins with a modular, low-cost validation setup using standard lab equipment before scaling to deployable units.</p>
+      </div>
+      <div class="photo-frame reveal">
+        <img src="table_top.png" alt="AquaCircle bench-scale prototype setup" />
       </div>
     </section>
 
