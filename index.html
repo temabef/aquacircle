@@ -32,6 +32,7 @@
 
     html {
       scroll-behavior: smooth;
+      height: 100%;
     }
 
     body {
@@ -39,8 +40,38 @@
       color: var(--text);
       font-family: var(--font-main);
       line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+    }
+
+    /* ── Scroll Dots ── */
+    .scroll-dots {
+      position: fixed;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dot:hover { background: rgba(255,255,255,0.4); }
+    .dot.active {
+      background: var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      transform: scale(1.4);
     }
 
     /* ── Background Blobs ── */
@@ -73,8 +104,9 @@
     }
 
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      width: 100%;
       z-index: 100;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
@@ -124,9 +156,18 @@
       color: var(--primary);
     }
 
-    /* ── Hero ── */
+    /* ── Hero & Sections ── */
+    .hero, .section {
+      height: 100vh;
+      min-height: 700px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 0;
+    }
+
     .hero {
-      padding: 100px 0 80px;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 60px;
@@ -225,12 +266,8 @@
     }
 
     /* ── Sections ── */
-    .section {
-      padding: 80px 0;
-    }
-
     .section-header {
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
 
     .section-header h2 {
@@ -309,19 +346,20 @@
       border: 1px solid var(--border);
       overflow: hidden;
       background: var(--surface);
-      margin: 40px 0;
+      margin: 20px 0;
     }
 
     .photo-frame { padding: 0; }
     .photo-frame img { border-radius: 0; }
 
     .target-list li {
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 12px;
       color: var(--muted);
+      font-size: 0.9rem;
     }
 
     .target-list li:last-child { border-bottom: none; }
@@ -333,22 +371,23 @@
 
     .market-copy { padding-right: 40px; }
     .market-heading { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 20px; }
-    .market-sub { color: var(--muted); margin-bottom: 30px; }
+    .market-sub { color: var(--muted); margin-bottom: 20px; font-size: 0.95rem; }
 
     /* ── Founder & Program ── */
     .founder-card, .program-card, .contact-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 32px;
-      padding: 48px;
+      padding: 40px;
     }
 
     footer {
-      padding: 60px 0 40px;
+      padding: 40px 0;
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--muted);
       font-size: 0.9rem;
+      scroll-snap-align: end;
     }
 
     /* ── Reveal ── */
@@ -369,11 +408,21 @@
     .reveal-delay-4 { transition-delay: 0.4s; }
 
     @media (max-width: 960px) {
+      body {
+        scroll-snap-type: none;
+        height: auto;
+      }
+      .hero, .section {
+        height: auto;
+        min-height: auto;
+        padding: 60px 0;
+      }
       .hero { grid-template-columns: 1fr; text-align: center; }
       .hero-text { margin-left: auto; margin-right: auto; }
       .hero-actions { justify-content: center; }
       .cards-3, .cards-4 { grid-template-columns: 1fr; }
       .section-split { grid-template-columns: 1fr; }
+      .scroll-dots { display: none; }
     }
   </style>
 </head>
@@ -381,6 +430,17 @@
   <div class="blob-container">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+  </div>
+  <div class="scroll-dots">
+    <div class="dot active" data-target="top"></div>
+    <div class="dot" data-target="problem"></div>
+    <div class="dot" data-target="solution"></div>
+    <div class="dot" data-target="technology"></div>
+    <div class="dot" data-target="pilot"></div>
+    <div class="dot" data-target="impact"></div>
+    <div class="dot" data-target="founder"></div>
+    <div class="dot" data-target="program"></div>
+    <div class="dot" data-target="contact"></div>
   </div>
   <header>
     <div class="header-inner">
@@ -608,18 +668,47 @@
 
   <script>
     (function () {
-      const io = new IntersectionObserver(
+      // ── Intersection Observer for Reveal ──
+      const revealIo = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
               e.target.classList.add('visible');
-              io.unobserve(e.target);
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.2 }
       );
-      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      document.querySelectorAll('.reveal').forEach((el) => revealIo.observe(el));
+
+      // ── Scroll Snap Dots Logic ──
+      const dots = document.querySelectorAll('.dot');
+      const sections = document.querySelectorAll('section, main > section, #top');
+
+      const dotIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const id = e.target.id;
+              dots.forEach(dot => {
+                dot.classList.toggle('active', dot.dataset.target === id);
+              });
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      document.querySelectorAll('section').forEach(s => dotIo.observe(s));
+      dotIo.observe(document.getElementById('top'));
+
+      // ── Click to Scroll ──
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const target = document.getElementById(dot.dataset.target);
+          target.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
     })();
   </script>
 
