@@ -327,10 +327,88 @@ section {
 
 /* ── Responsive ── */
 @media (max-width: 1100px) {
-  section { padding: 0 40px; }
-  .dot-nav { left: 20px; }
-  header { padding: 24px 40px; }
-  .hero-visual { position: relative; width: 100%; right: 0; transform: none; margin-top: 40px; }
-  .hero-title { font-size: 4rem; }
-  .bento-grid { grid-template-columns: 1fr; height: auto; }
+  section { padding: 0 60px; }
+  .dot-nav { left: 30px; }
+  .hero-visual { width: 45%; }
+  .hero-title { font-size: clamp(3rem, 8vw, 6rem); }
+}
+
+@media (max-width: 960px) {
+  html, body { overflow: visible; height: auto; }
+  #app-wrap { scroll-snap-type: none; overflow-y: visible; height: auto; }
+  section { 
+    height: auto; 
+    min-height: auto; 
+    padding: 120px 40px 80px; 
+    display: block;
+    scroll-snap-align: none;
+  }
+  
+  header { padding: 20px 40px; background: rgba(5, 7, 10, 0.95); }
+  nav { gap: 20px; }
+  nav a { font-size: 0.7rem; }
+
+  .hero-visual { 
+    position: relative; 
+    width: 100%; 
+    right: 0; 
+    top: 0; 
+    transform: none !important; 
+    margin: 40px auto 0; 
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-visual img { 
+    max-height: 45vh; 
+    width: 90%; 
+    object-fit: contain; 
+  }
+  .hero-content { max-width: 100%; text-align: center; }
+  .hero-title span { display: inline; }
+  
+  .bento-grid { 
+    grid-template-columns: 1fr; 
+    height: auto; 
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .bento-item.span-2, .bento-item.tall { grid-column: span 1; grid-row: span 1; }
+  .bento-item { padding: 32px; border-radius: 24px; }
+  .bento-item .stat { font-size: 3.5rem; }
+
+  .section-title { font-size: 2.8rem; margin-bottom: 40px; text-align: center; }
+  .section-label { text-align: center; }
+  
+  .dot-nav { display: none !important; }
+
+  header { 
+    padding: 15px 40px; 
+    flex-direction: column; 
+    gap: 15px; 
+    height: auto;
+    text-align: center;
+  }
+  nav { 
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  nav a { font-size: 0.65rem; letter-spacing: 0.05em; }
+  #problem .section-inner > div { grid-template-columns: 1fr !important; gap: 40px !important; }
+  #pilot .section-inner, #founder .section-inner { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center; }
+  #founder .floating-frame { margin: 0 auto; width: 60%; }
+}
+
+@media (max-width: 480px) {
+  header { padding: 15px 20px; }
+  .brand { gap: 8px; font-size: 1.1rem; }
+  .brand-logo { width: 32px; height: 32px; }
+  nav { display: none; } /* Hide nav links on very small screens to keep it clean */
+  
+  section { padding: 100px 20px 60px; }
+  .hero-title { font-size: 3.2rem; }
+  .section-title { font-size: 2.2rem; }
+  .bento-item { padding: 24px; }
 }
