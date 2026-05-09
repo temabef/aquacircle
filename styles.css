@@ -1,0 +1,321 @@
+:root {
+  --bg: #05070a;
+  --surface: rgba(15, 23, 42, 0.6);
+  --surface-bright: rgba(30, 41, 59, 0.4);
+  --primary: #22d3ee;
+  --primary-glow: rgba(34, 211, 238, 0.3);
+  --accent: #2dd4bf;
+  --text: #f8fafc;
+  --muted: #64748b;
+  --border: rgba(255, 255, 255, 0.05);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-bright); border-radius: 10px; }
+
+/* ── Container ── */
+#app-wrap {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* ── Background Blobs ── */
+.background-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.glow-blob {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+  filter: blur(120px);
+  opacity: 0.3;
+}
+
+.blob-1 { top: -20%; right: -10%; }
+.blob-2 { bottom: -20%; left: -10%; background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, transparent 70%); }
+
+/* ── Header ── */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 32px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: white;
+  padding: 6px;
+}
+
+nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+
+nav a:hover { color: #fff; }
+
+/* ── Hero Slide ── */
+section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  padding: 0 100px;
+  overflow: hidden;
+}
+
+.hero-content {
+  z-index: 10;
+  max-width: 800px;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 40px;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 8.5rem);
+  line-height: 0.85;
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  margin-bottom: 40px;
+  text-transform: lowercase;
+}
+
+.hero-title span {
+  display: block;
+  background: linear-gradient(to right, #fff, var(--muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--primary);
+  -webkit-text-fill-color: var(--primary);
+}
+
+.hero-visual {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-45%);
+  width: 55%;
+  z-index: 1;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 100px var(--primary-glow));
+}
+
+/* ── Bento Grid Sections ── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+  width: 100%;
+  height: 70vh;
+}
+
+.bento-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, background 0.4s;
+}
+
+.bento-item:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  background: var(--surface-bright);
+}
+
+.bento-item.span-2 { grid-column: span 2; }
+.bento-item.tall { grid-row: span 2; }
+
+.bento-item h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
+}
+
+.bento-item p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.bento-item .stat {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+/* ── Content Sections ── */
+.section-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: 60px;
+}
+
+/* ── Floating Photo Frame ── */
+.floating-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+
+.floating-frame img {
+  width: 100%;
+  border-radius: 32px;
+  display: block;
+}
+
+/* ── Scroll Dots ── */
+.dot-nav {
+  position: fixed;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: var(--muted);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.dot.active {
+  background: var(--primary);
+  transform: scale(2.5);
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* ── Reveal Animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  section { padding: 0 40px; }
+  .dot-nav { left: 20px; }
+  header { padding: 24px 40px; }
+  .hero-visual { position: relative; width: 100%; right: 0; transform: none; margin-top: 40px; }
+  .hero-title { font-size: 4rem; }
+  .bento-grid { grid-template-columns: 1fr; height: auto; }
+}
