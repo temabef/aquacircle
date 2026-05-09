@@ -163,19 +163,32 @@ section {
 
 .hero-visual {
   position: absolute;
-  right: 0%;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 50%;
   z-index: 1;
-  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(60px);
 }
 
 .hero-visual img {
   width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 80px var(--primary-glow));
-  mix-blend-mode: lighten;
+  max-height: 85vh;
+  object-fit: contain;
+  transition: transform 0.5s;
 }
 
 /* ── Bento Grid Sections ── */
